@@ -1,7 +1,7 @@
-import { getCSS } from "./common.js"
+import { getCSS, criarGrafico, incluirTexto } from "./common.js"
 
 async function redesFavoritasMundo() {
-    const url = 'https://raw.githubusercontent.com/ISABELLYVF/narrativa-de-grafico/api/main/redes-favoritas.json'
+    const url = 'https://raw.githubusercontent.com/guilhermeonrails/api/main/redes-favoritas.json'
     const res = await fetch(url)
     const dados = await res.json()
     const redes = Object.keys(dados)
@@ -37,10 +37,9 @@ async function redesFavoritasMundo() {
         }
     }
 
-    const grafico = document.createElement('div')
-    grafico.className = 'grafico'
-    document.getElementById('graficos-container').appendChild(grafico)
-    Plotly.newPlot(grafico, data, layout)
+    criarGrafico(data, layout)
+
+    incluirTexto(`Embora o <span>Instagram</span> ocupe a quarta posição em termos de número total de usuários entre as redes sociais, destaca-se como a <span>preferida pelos usuários</span>. Supera até mesmo o <span>Facebook</span>, a plataforma com mais usuários, sendo a terceira opção mais apreciada pelos usuários. <br>Essa preferência evidencia a forte conexão e apreço que as pessoas têm pelo Instagram em comparação com outras redes sociais`)
 }
 
 redesFavoritasMundo()
